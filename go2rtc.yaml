@@ -1,0 +1,18 @@
+# go2rtc Configuration for Eagle Cement Hikvision CCTV Stream
+
+streams:
+  # Hikvision Channel 101 - Main Stream (HD 720p/1080p)
+  eagle_cam_main: "rtsp://admin:REDACTED@192.168.100.134:554/Streaming/Channels/101"
+  
+  # Hikvision Channel 102 - Sub Stream (SD Fast - Preferred for UI cards)
+  eagle_cam_sub: "rtsp://admin:REDACTED@192.168.100.134:554/Streaming/Channels/102"
+
+api:
+  listen: ":1984"
+  origin: "*"
+
+rtsp:
+  listen: ":8554"
+
+webrtc:
+  listen: ":8555"
