@@ -1,0 +1,12 @@
+services:
+  go2rtc:
+    image: alexxit/go2rtc:latest
+    container_name: eagle-camera
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./go2rtc.yaml:/config/go2rtc.yaml:ro
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Manila
