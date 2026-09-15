@@ -1,13 +1,23 @@
-# go2rtc Configuration for Eagle Cement Gate CCTV Collection
+# go2rtc Configuration for Eagle Cement Gate CCTV Collection (Dahua cameras)
 streams:
   # Gate Dome (PTZ / Gate Overview)
-  gate_dome: "${CCTV_DOME_URL}"
+  gate_dome:
+    - "${CCTV_DOME_URL}"
+    - "ffmpeg:${CCTV_DOME_URL}#video=h264"
 
-  # Gate Face Recognition (Driver ID)
-  gate_face: "${CCTV_FACE_URL}"
+  # Gate Face Recognition (Driver ID) - Sub stream (704x480)
+  gate_face:
+    - "${CCTV_FACE_URL}"
+    - "ffmpeg:${CCTV_FACE_URL}#video=h264"
 
-  # Gate License Plate Recognition (ANPR)
-  gate_plate: "${CCTV_PLATE_URL}"
+  # Gate License Plate Recognition (ANPR) - Sub stream (704x480 for smooth WebRTC live view)
+  gate_plate:
+    - "${CCTV_PLATE_URL}"
+    - "ffmpeg:${CCTV_PLATE_URL}#video=h264"
+
+  # Gate License Plate HD (4K 3840x2160 for high-res snapshots / OCR)
+  gate_plate_hd:
+    - "${CCTV_PLATE_HD_URL}"
 
 api:
   listen: ":1984"
@@ -19,5 +29,4 @@ rtsp:
 webrtc:
   listen: ":8555"
   candidates:
-    - 127.0.0.1:8555
-
+    - 192.168.8.49:8555
